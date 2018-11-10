@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 加载属性文件 -->
+    <properties resource="db.properties">
+        <!-- properties中还可配置一些属性值和属性名 -->
+    </properties>
+
+    <!-- 全局配置参数 需要时在定义   延迟加载-->
+    <settings>
+        <!--打开延迟加载开关-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--将积极加载改为消极加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--开启二级缓存-->
+        <!--<setting name="cacheEnabled" value="true"/>-->
+    </settings>
+
+    <!-- 别名定义 -->
+    <typeAliases>
+        <!-- 针对单个别名定义
+            type:类型的路径
+            alias:别名
+        -->
+        <!--<typeAlias type="ck.mybatis.po.User" alias="user"/>-->
+
+        <!-- 批量别名定义
+        指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名(数字母大小写都可以)
+        定义多个包
+        -->
+        <package name="ck.mybatis.po"/>
+
+    </typeAliases>
+
+    <!-- 类型处理工厂-->
+    <!--<typeHandlers>
+
+    </typeHandlers>-->
+
+    <!-- 对象工厂 不需要-->
+    <!--<objectFactory type=""/>-->
+
+    <!-- 插件 不需要-->
+    <!--<plugins>
+        <plugin interceptor=""></plugin>
+    </plugins>-->
+
+    <!-- 和spring整合后 environments配置将废除  环境集合属性对象-->
+    <environments default="development">
+        <!-- 环境子属性对象 -->
+        <environment id="development">
+            <!-- 使用jdbc事务管理,由mybatias控制  事务管理-->
+            <transactionManager type="JDBC" />
+            <!-- 数据库连接池,由mybatias控制  数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 加载映射文件  映射器 -->
+    <mappers>
+        <mapper resource="sqlmap/user.xml"></mapper>
+
+        <!-- 通过resource方式一次加载一个 单个加载 -->
+        <!--<mapper resource="mapper/userMapper.xml"></mapper>-->
+
+        <!-- 通过mapper接口加载映射文件
+        遵循规范：将mapper接口和mapper.xml文件名称保持一致，且在一个目录
+        上边规范前提：使用mapper代理的方法
+        -->
+        <!--<mapper class="ck.mybatis.mapper.UserMapper"/>-->
+
+        <!-- 批量加载
+        指定包名：指定mapper接口的包名,mybatis自动扫描包下边所有mapper接口进行加载
+        -->
+        <package name="ck.mybatis.mapper"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 别名定义 -->
+    <typeAliases>
+        <!-- 针对单个别名定义
+            type:类型的路径
+            alias:别名
+        -->
+        <!-- 批量别名定义
+        指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名(数字母大小写都可以)
+        定义多个包
+        -->
+        <package name="com.ck.ssm.po"></package>
+    </typeAliases>
+
+    <!-- 加载映射文件  映射器 -->
+    <mappers>
+        <mapper resource="sqlmap/user.xml"/>
+        <!-- 批量加载
+        指定包名：指定mapper接口的包名,mybatis自动扫描包下边所有mapper接口进行加载
+        -->
+        <!--和spring整合后使用的是spring的扫描器 不需要配置-->
+        <!--<package name="com.ck.ssm.mapper"/>-->
+    </mappers>
+</configuration>
