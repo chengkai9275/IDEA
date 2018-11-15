@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Titel: 名字释义
- * @Description: java类作用描述
+ * @Titel: ProductController
+ * @Description: ProductController 产品
  * @Author: CK
  * @CreateDate: 2018/11/13 19:42
  * @Version: 1.0
@@ -43,12 +45,20 @@ public class ProductController {
         return mv;
     }
 
-    /*@RequestMapping("/findByIdPro")
-    public String findByIdPro(String id,Model model){
-        Product pro = productService.findProById(id);
-        model.addAttribute("pro",pro);
-        return "product-list";
-    }*/
+    /**
+     * 根据Id查询用户
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findProById/{id}")
+    public ModelAndView findProById(@PathVariable String id){
+        ModelAndView mv = new ModelAndView("product-list");
+        if(id != null && !"".equals(id)){
+            Product pro = productService.findProById(id);
+            mv.addObject("pro",pro);
+        }
+        return mv;
+    }
 
     /**
      * 插入新用户
@@ -57,7 +67,22 @@ public class ProductController {
      */
     @RequestMapping("/insertPro")
     public String insertPro(Product product){
-        productService.insertPro(product);
-        return "redirect:product/findAllPro";
+        if(product != null){
+            productService.insertPro(product);
+        }
+        return "redirect:findAllPro/1/4";
+    }
+
+    /**
+     * 根据Id删除用户
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deletePro")
+    public String deletePro(String[] id){
+        if(id.length > 0){
+            productService.deleteProById(Arrays.asList(id));
+        }
+        return "redirect:findAllPro/1/4";
     }
 }

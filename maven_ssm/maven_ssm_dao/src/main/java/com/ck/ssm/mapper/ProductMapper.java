@@ -1,6 +1,7 @@
 package com.ck.ssm.mapper;
 
 import com.ck.ssm.pojo.Product;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,7 +19,6 @@ public interface ProductMapper {
      * 查询所有产品
      * @return
      */
-    @Select("select * from PRODUCT order by departureTime desc")
     List<Product> findAllPro();
 
     /**
@@ -26,7 +26,6 @@ public interface ProductMapper {
      * @param id
      * @return
      */
-    @Select("select * from product where id = #{id}")
     Product findProById(String id);
 
     /**
@@ -34,7 +33,12 @@ public interface ProductMapper {
      * @param product
      * @return
      */
-    @Insert("insert into product (productNum,productName,cityName,departureTime,productPrice,productDesc,productStatus)" +
-            " values(#{productNum},#{productName},#{cityName},#{departureTime},#{productPrice},#{productDesc},#{productStatus})")
-    Boolean insertPro(Product product);
+     Boolean insertPro(Product product);
+
+    /**
+     * 删除产品
+     * @param ids
+     * @return
+     */
+    Boolean deleteProById(List<String> ids);
 }

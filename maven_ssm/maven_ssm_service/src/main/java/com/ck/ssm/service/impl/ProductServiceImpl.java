@@ -52,7 +52,16 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     public Boolean insertPro(Product product) {
-        Boolean lean = productMapper.insertPro(product);
-        return lean;
+        return productMapper.insertPro(product);
+    }
+
+    /**
+     * 删除产品
+     *
+     * @param ids
+     * @return
+     */
+    public Boolean deleteProById(List<String> ids) {
+        return productMapper.deleteProById(ids);
     }
 }

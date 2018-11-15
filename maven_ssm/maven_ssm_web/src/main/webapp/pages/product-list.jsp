@@ -119,11 +119,13 @@
                                             onclick="location.href='${pageContext.request.contextPath}/pages/product-add.jsp'">
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
-                                    <button type="button" class="btn btn-default" title="删除">
+                                    <button type="button" id="btn_sub" class="btn btn-default" title="删除">
                                         <i class="fa fa-trash-o"></i> 删除
                                     </button>
-                                    <button type="button" class="btn btn-default" title="刷新">
-                                        <i class="fa fa-refresh"></i> 刷新
+                                    <button type="button" class="btn btn-default" title="刷新"
+                                            onclick="location = '${pageContext.request.contextPath}/product/findAllPro/1/${pageInfo.pageSize}'">
+                                        <i class="fa fa-refresh"></i>
+                                        刷新
                                     </button>
                                 </div>
                             </div>
@@ -136,46 +138,46 @@
                             </div>
                         </div>
                         <!--工具栏/-->
-
-                        <!--数据列表-->
-                        <table id="dataList"
-                               class="table table-bordered table-striped table-hover dataTable">
-                            <thead>
-                            <tr>
-                                <th class="" style="padding-right: 0px;"><input
-                                        id="selall" type="checkbox" class="icheckbox_square-blue">
-                                </th>
-                                <th class="sorting_desc">编号</th>
-                                <th class="sorting_asc sorting_asc_disabled">产品名称</th>
-                                <th class="sorting_desc sorting_desc_disabled">出发城市</th>
-                                <th class="sorting">出发时间</th>
-                                <th class="text-center sorting">产品价格</th>
-                                <th class="sorting">产品描述</th>
-                                <th class="text-center sorting">状态</th>
-                                <th class="text-center">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <c:forEach items="${pageInfo.list}" var="product">
+                        <form id="delpro" action="${pageContext.request.contextPath}/product/deletePro" method="post">
+                            <!--数据列表-->
+                            <table id="dataList"
+                                   class="table table-bordered table-striped table-hover dataTable">
+                                <thead>
                                 <tr>
-                                    <td><input type="checkbox" name="id" value="${product.id}"></td>
-                                    <td>${product.productNum }</td>
-                                    <td>${product.productName }</td>
-                                    <td>${product.cityName }</td>
-                                    <td>${product.departureTimeStr }</td>
-                                    <td class="text-center">${product.productPrice }</td>
-                                    <td>${product.productDesc }</td>
-                                    <td class="text-center">${product.productStatusStr }</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn bg-olive btn-xs">订单</button>
-                                        <button type="button" class="btn bg-olive btn-xs">详情</button>
-                                        <button type="button" class="btn bg-olive btn-xs">编辑</button>
-                                    </td>
+                                    <th class="text-center"><input
+                                            id="selall" type="checkbox" class="icheckbox_square-blue">
+                                    </th>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center ">产品名称</th>
+                                    <th class="text-center ">出发城市</th>
+                                    <th class="text-center ">出发时间</th>
+                                    <th class="text-center ">产品价格</th>
+                                    <th class="text-center ">产品描述</th>
+                                    <th class="text-center ">状态</th>
+                                    <th class="text-center ">操作</th>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+
+                                <c:forEach items="${pageInfo.list}" var="product">
+                                    <tr>
+                                        <td class="text-center"><input type="checkbox" name="id" value="${product.id}">
+                                        </td>
+                                        <td class="text-center">${product.productNum }</td>
+                                        <td class="text-center">${product.productName }</td>
+                                        <td class="text-center">${product.cityName }</td>
+                                        <td class="text-center">${product.departureTimeStr }</td>
+                                        <td class="text-center">${product.productPrice }</td>
+                                        <td class="text-center">${product.productDesc }</td>
+                                        <td class="text-center">${product.productStatusStr }</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn bg-olive btn-xs">编辑</button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </form>
                         <!--数据列表/-->
                     </div>
                     <!-- 数据表格 /-->
@@ -192,7 +194,8 @@
                             <select class="form-control" id="changePageSize" onchange="changePageSize()">
 
                                 <c:forEach begin="1" end="10" var="num">
-                                    <option <c:if test="${pageInfo.pageSize == num}">selected</c:if> >${num}</option>
+                                    <option
+                                            <c:if test="${pageInfo.pageSize == num}">selected</c:if> >${num}</option>
                                 </c:forEach>
 
                             </select> 条
@@ -204,14 +207,18 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/product/findAllPro/1/${pageInfo.pageSize}"
                                    aria-label="Previous">首页</a></li>
-                            <li><a href="${pageContext.request.contextPath}/product/findAllPro/${pageInfo.pageNum - 1}/${pageInfo.pageSize}">上一页</a></li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/product/findAllPro/${pageInfo.pageNum - 1}/${pageInfo.pageSize}">上一页</a>
+                            </li>
+
                             <c:forEach begin="1" end="${pageInfo.pages}" var="num">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/product/findAllPro/${num}/${pageInfo.pageSize}">${num}</a>
                                 </li>
                             </c:forEach>
-
-                            <li><a href="${pageContext.request.contextPath}/product/findAllPro/${pageInfo.pageNum + 1}/${pageInfo.pageSize}">下一页</a></li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/product/findAllPro/${pageInfo.pageNum + 1}/${pageInfo.pageSize}">下一页</a>
+                            </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/product/findAllPro/${pageInfo.pages}/${pageInfo.pageSize}"
                                    aria-label="Next">尾页</a></li>
@@ -333,6 +340,9 @@
 <script
         src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    $("#btn_sub").click(function () {
+        $("#delpro").submit();
+    });
 
     function changePageSize() {
         //获取下拉框的值

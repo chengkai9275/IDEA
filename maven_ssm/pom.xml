@@ -19,14 +19,14 @@
 
     <!-- 统一管理jar包版本 -->
     <properties>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.0.7.RELEASE</spring.version>
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.12</log4j.version>
         <shiro.version>1.2.3</shiro.version>
         <oracle.version>10.2.0.4.0</oracle.version>
         <mysql.version>5.1.6</mysql.version>
         <mybatis.version>3.4.5</mybatis.version>
-        <spring.security.version>5.0.1.RELEASE</spring.security.version>
+        <spring.security.version>5.0.4.RELEASE</spring.security.version>
     </properties>
 
     <!-- 锁定jar包版本 -->
@@ -171,6 +171,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- log end -->
         <dependency>
@@ -193,6 +199,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>${spring.security.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>

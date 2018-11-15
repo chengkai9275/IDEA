@@ -56,6 +56,16 @@ public class Product implements Serializable{
      */
     private String productStatusStr;
 
+    private Integer productDel;
+
+    public Integer getProductDel() {
+        return productDel;
+    }
+
+    public void setProductDel(Integer productDel) {
+        this.productDel = productDel;
+    }
+
     public String getId() {
         return id;
     }
@@ -152,6 +162,7 @@ public class Product implements Serializable{
                 ", productDesc='" + productDesc + '\'' +
                 ", productStatus=" + productStatus +
                 ", productStatusStr='" + productStatusStr + '\'' +
+                ", productDel=" + productDel +
                 '}';
     }
 }

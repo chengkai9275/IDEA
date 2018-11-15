@@ -33,4 +33,11 @@ public interface ProductService {
      * @return
      */
     Boolean insertPro(Product product);
+
+    /**
+     * 删除产品
+     * @param ids
+     * @return
+     */
+    Boolean deleteProById(List<String> ids);
 }

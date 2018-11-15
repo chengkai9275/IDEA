@@ -4,6 +4,7 @@ import com.ck.ssm.util.DateUtils;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Titel: Orders
@@ -38,10 +39,24 @@ public class Orders implements Serializable{
      */
     private String orderStatusStr;
     /**
-     *
+     *出游人数
      */
     private int peopleCount;
+
+    /**
+     * 产品引用
+     */
     private Product product;
+
+    /**
+     * 旅客
+     */
+    private List<Traveller> travellers;
+    /**
+     * 会员
+     */
+    private Member member;
+
     /**
      * 支付方式 0支付宝 1微信 2其他
      */
@@ -51,9 +66,22 @@ public class Orders implements Serializable{
      */
     private String payTypeStr;
     /**
-     *
+     * 订单详情
      */
     private String orderDesc;
+
+    /**
+     * 是否删除 0删除 1未删除
+     */
+    private Integer orderDel;
+
+    public Integer getOrderDel() {
+        return orderDel;
+    }
+
+    public void setOrderDel(Integer orderDel) {
+        this.orderDel = orderDel;
+    }
 
     public String getId() {
         return id;
@@ -122,6 +150,22 @@ public class Orders implements Serializable{
         this.product = product;
     }
 
+    public List<Traveller> getTravellers() {
+        return travellers;
+    }
+
+    public void setTravellers(List<Traveller> travellers) {
+        this.travellers = travellers;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
     public Integer getPayType() {
         return payType;
     }
@@ -164,9 +208,12 @@ public class Orders implements Serializable{
                 ", orderStatusStr='" + orderStatusStr + '\'' +
                 ", peopleCount=" + peopleCount +
                 ", product=" + product +
+                ", travellers=" + travellers +
+                ", member=" + member +
                 ", payType=" + payType +
                 ", payTypeStr='" + payTypeStr + '\'' +
                 ", orderDesc='" + orderDesc + '\'' +
+                ", orderDel=" + orderDel +
                 '}';
     }
 }
