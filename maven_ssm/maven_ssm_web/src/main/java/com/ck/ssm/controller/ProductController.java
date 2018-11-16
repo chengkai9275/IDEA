@@ -30,58 +30,72 @@ public class ProductController {
     private ProductService productService;
 
     /**
-     * 分页查询所有用户
+     * 分页查询所有产品
      * @param pageNum 页码
      * @param pageSize 每页条数
      * @return
      */
     @RequestMapping("/findAllPro/{pageNum}/{pageSize}")
-    public ModelAndView findAllPro(@PathVariable int pageNum,
-                                   @PathVariable int pageSize){
+    public ModelAndView findAllPro(@PathVariable Integer pageNum,
+                                   @PathVariable Integer pageSize){
         ModelAndView mv = new ModelAndView("product-list");
-        List<Product> products = productService.findAllPro(pageNum,pageSize);
-        PageInfo pageInfo = new PageInfo(products);
-        mv.addObject("pageInfo",pageInfo);
+        try {
+            List<Product> products = productService.findAllPro(pageNum,pageSize);
+            PageInfo pageInfo = new PageInfo(products);
+            mv.addObject("pageInfo",pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return mv;
     }
 
     /**
-     * 根据Id查询用户
+     * 根据Id查询产品
      * @param id
      * @return
      */
     @RequestMapping("/findProById/{id}")
     public ModelAndView findProById(@PathVariable String id){
         ModelAndView mv = new ModelAndView("product-list");
-        if(id != null && !"".equals(id)){
-            Product pro = productService.findProById(id);
-            mv.addObject("pro",pro);
-        }
+            try {
+                Product pro = productService.findProById(id);
+                mv.addObject("pro",pro);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         return mv;
     }
 
     /**
-     * 插入新用户
+     * 插入新产品
      * @param product
      * @return
      */
     @RequestMapping("/insertPro")
     public String insertPro(Product product){
         if(product != null){
-            productService.insertPro(product);
+            try {
+                productService.insertPro(product);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return "redirect:findAllPro/1/4";
     }
 
     /**
-     * 根据Id删除用户
+     * 根据Id删除产品
      * @param id
      * @return
      */
     @RequestMapping("/deletePro")
     public String deletePro(String[] id){
         if(id.length > 0){
-            productService.deleteProById(Arrays.asList(id));
+            try {
+                productService.deleteProById(Arrays.asList(id));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return "redirect:findAllPro/1/4";
     }

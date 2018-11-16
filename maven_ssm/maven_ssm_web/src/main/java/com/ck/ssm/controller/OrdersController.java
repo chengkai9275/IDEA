@@ -34,12 +34,17 @@ public class OrdersController {
      * @return
      */
     @RequestMapping("/findAllOrder/{pageNum}/{pageSize}")
-    public ModelAndView findAllOrder(@PathVariable int pageNum,
-                                     @PathVariable int pageSize){
+    public ModelAndView findAllOrder(@PathVariable Integer pageNum,
+                                     @PathVariable Integer pageSize){
         ModelAndView mv = new ModelAndView("orders-list");
-        List<Orders> orders = ordersService.findAllOrder(pageNum, pageSize);
-        PageInfo pageInfo = new PageInfo(orders);
-        mv.addObject("pageInfo",pageInfo);
+        List<Orders> orders = null;
+        try {
+            orders = ordersService.findAllOrder(pageNum, pageSize);
+            PageInfo pageInfo = new PageInfo(orders);
+            mv.addObject("pageInfo",pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return mv;
     }
 
@@ -51,10 +56,12 @@ public class OrdersController {
     @RequestMapping("/findOrderById/{id}")
     public ModelAndView findOrderById(@PathVariable String id){
         ModelAndView mv = new ModelAndView("orders-show");
-        if(id != null && !"".equals(id)){
-            Orders order = ordersService.findOrderById(id);
-            mv.addObject("order",order);
-        }
+            try {
+                Orders order = ordersService.findOrderById(id);
+                mv.addObject("order",order);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         return mv;
     }
 
@@ -66,7 +73,11 @@ public class OrdersController {
     @RequestMapping("/deleteOrder")
     public String deletePro(String[] ids){
         if (ids.length > 0){
-            ordersService.deleteOrderById(Arrays.asList(ids));
+            try {
+                ordersService.deleteOrderById(Arrays.asList(ids));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return "redirect:findAllOrder/1/4";
     }

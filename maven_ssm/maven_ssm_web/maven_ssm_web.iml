@@ -6,6 +6,7 @@
         <fileset id="fileset" name="ApplicationContext" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring/ApplicationContext.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/SpringMVC.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-security.xml</file>
         </fileset>
       </configuration>
     </facet>

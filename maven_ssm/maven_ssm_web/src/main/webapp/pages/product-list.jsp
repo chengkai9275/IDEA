@@ -194,8 +194,7 @@
                             <select class="form-control" id="changePageSize" onchange="changePageSize()">
 
                                 <c:forEach begin="1" end="10" var="num">
-                                    <option
-                                            <c:if test="${pageInfo.pageSize == num}">selected</c:if> >${num}</option>
+                                    <option <c:if test="${pageInfo.pageSize == num}">selected</c:if> >${num}</option>
                                 </c:forEach>
 
                             </select> 条
@@ -239,14 +238,7 @@
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.8
-        </div>
-        <strong>Copyright &copy; 2014-2017 <a
-                href="http://www.itcast.cn">研究院研发部</a>.
-        </strong> All rights reserved.
-    </footer>
+    <jsp:include page="footer.jsp"></jsp:include>
     <!-- 底部导航 /-->
 
 </div>

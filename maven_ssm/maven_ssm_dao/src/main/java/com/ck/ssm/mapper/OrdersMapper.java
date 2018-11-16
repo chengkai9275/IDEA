@@ -16,20 +16,23 @@ public interface OrdersMapper {
     /**
      * 查询所有订单
      * @return
+     * @throws Exception
      */
-    List<Orders> findAllOrder();
+    List<Orders> findAllOrder() throws Exception;
 
     /**
      * 根据Id查询订单
      * @param id
      * @return
+     * @throws Exception
      */
-    Orders findOrderById(String id);
+    Orders findOrderById(String id) throws Exception;
 
     /**
      * 根据Id删除订单
      * @param ids
      * @return
+     * @throws Exception
      */
-    Boolean deleteOrderById(List<String> ids);
+    Boolean deleteOrderById(List<String> ids) throws Exception;
 }

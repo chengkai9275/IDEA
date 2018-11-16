@@ -17,27 +17,31 @@ public interface ProductService {
      * @param pageNum 页码值
      * @param pageSize 每页条数
      * @return
+     * @throws Exception
      */
-    List<Product> findAllPro(int pageNum,int pageSize);
+    List<Product> findAllPro(Integer pageNum,Integer pageSize) throws Exception;
 
     /**
      * 根据ID查询产品
      * @param id
      * @return
+     * @throws Exception
      */
-    Product findProById(String id);
+    Product findProById(String id) throws Exception;
 
     /**
      * 添加产品
      * @param product
      * @return
+     * @throws Exception
      */
-    Boolean insertPro(Product product);
+    Boolean insertPro(Product product) throws Exception;
 
     /**
      * 删除产品
      * @param ids
      * @return
+     * @throws Exception
      */
-    Boolean deleteProById(List<String> ids);
+    void deleteProById(List<String> ids) throws Exception;
 }

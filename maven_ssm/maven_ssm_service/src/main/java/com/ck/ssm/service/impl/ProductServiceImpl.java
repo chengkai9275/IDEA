@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,8 +30,9 @@ public class ProductServiceImpl implements ProductService {
      * @param pageNum  页码值
      * @param pageSize 每页条数
      * @return
+     * @throws Exception
      */
-    public List<Product> findAllPro(int pageNum, int pageSize) {
+    public List<Product> findAllPro(Integer pageNum, Integer pageSize) throws Exception {
         PageHelper.startPage(pageNum,pageSize);
         return productMapper.findAllPro();
     }
@@ -40,8 +42,9 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param id
      * @return
+     * @throws Exception
      */
-    public Product findProById(String id) {
+    public Product findProById(String id) throws Exception {
         return productMapper.findProById(id);
     }
 
@@ -50,8 +53,9 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param product
      * @return
+     * @throws Exception
      */
-    public Boolean insertPro(Product product) {
+    public Boolean insertPro(Product product) throws Exception {
         return productMapper.insertPro(product);
     }
 
@@ -60,8 +64,15 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param ids
      * @return
+     * @throws Exception
      */
-    public Boolean deleteProById(List<String> ids) {
-        return productMapper.deleteProById(ids);
+    public void deleteProById(List<String> ids) throws Exception {
+        List list = new ArrayList();
+        for (String id : ids) {
+            list.add(productMapper.findProById(id));
+        }
+        if(list.size() > 0){
+            productMapper.deleteProById(ids);
+        }
     }
 }
