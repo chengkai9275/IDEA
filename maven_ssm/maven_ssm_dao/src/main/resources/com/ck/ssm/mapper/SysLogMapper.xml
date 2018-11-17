@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ck.ssm.mapper.SysLogMapper">
+
+    <!--查询所有日志信息-->
+    <select id="findAllSysLog" resultType="SysLog">
+        SELECT * FROM syslog
+    </select>
+
+    <!--添加新日志-->
+    <insert id="insertSysLog" parameterType="SysLog">
+        INSERT INTO syslog(visitTime,username,ip,url,executionTime,method)
+        values(#{visitTime},#{username},#{ip},#{url},#{executionTime},#{method})
+    </insert>
+</mapper>
