@@ -9,7 +9,6 @@
 
 
 
-
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
@@ -26,7 +25,7 @@
     -->
     <security:http auto-config="true" use-expressions="true">
         <!-- 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" -->
-        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN','ROLE_BUSINESS')"/>
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/login.jsp"

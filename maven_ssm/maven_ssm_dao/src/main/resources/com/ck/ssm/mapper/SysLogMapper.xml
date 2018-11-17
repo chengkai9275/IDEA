@@ -7,7 +7,7 @@
 
     <!--查询所有日志信息-->
     <select id="findAllSysLog" resultType="SysLog">
-        SELECT * FROM syslog
+        SELECT * FROM syslog ORDER BY visitTime DESC
     </select>
 
     <!--添加新日志-->
