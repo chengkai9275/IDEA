@@ -47,7 +47,7 @@
 
     <!--给角色添加权限-->
     <insert id="addPermissionToRole" parameterType="string">
-        INSERT INTO role_ (roleName,roleDesc) VALUES (#{param1},#{param2})
+        INSERT INTO role_permission (permissionId,roleId) VALUES (#{param1},#{param2})
     </insert>
 
     <!--动态SQL批量删除-->

@@ -2,10 +2,10 @@ package com.ck.ssm.controller;
 
 import com.ck.ssm.pojo.Role;
 import com.ck.ssm.pojo.UserInfo;
-import com.ck.ssm.service.RoleService;
 import com.ck.ssm.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
-
     /**
      * 查询所有用户
      *
@@ -37,7 +34,7 @@ public class UserController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("findAllUser/{pageNum}/{pageSize}")
+    @RequestMapping("/findAllUser/{pageNum}/{pageSize}")
     public ModelAndView findAllUser(@PathVariable Integer pageNum,
                                     @PathVariable Integer pageSize) {
         ModelAndView mv = new ModelAndView("user-list");
@@ -57,7 +54,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @RequestMapping("findUserById/{id}")
+    @RequestMapping("/findUserById/{id}")
     public ModelAndView findUserById(@PathVariable String id) {
         ModelAndView mv = new ModelAndView("user-show");
         try {
@@ -67,6 +64,15 @@ public class UserController {
             e.printStackTrace();
         }
         return mv;
+    }
+
+    /**
+     * 添加用户界面
+     * @return
+     */
+    @RequestMapping("/insertUserJsp")
+    public String insertUserJsp(){
+        return "user-add";
     }
 
     /**
@@ -88,29 +94,12 @@ public class UserController {
     }
 
     /**
-     * 添加用户
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping("/deleteUser")
-    public String deleteUser(String[] id) {
-        if (id.length > 0) {
-            try {
-                userService.deleteUser(Arrays.asList(id));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return "redirect:findAllUser/1/4";
-    }
-
-    /**
      * 添加角色界面
      *
      * @param id
      * @return
      */
+    @Secured({"ROLE_SUPERADMIN"})
     @RequestMapping("/addRole/{id}")
     public ModelAndView addRole(@PathVariable String id) {
         ModelAndView mv = new ModelAndView("user-role-add");
@@ -118,7 +107,7 @@ public class UserController {
             UserInfo userInfo = userService.findUserById(id);
             List<Role> roles = userService.findOtherRoleById(userInfo.getId());
             mv.addObject("userInfo", userInfo);
-            mv.addObject("roles",roles);
+            mv.addObject("roles", roles);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,5 +131,23 @@ public class UserController {
             }
         }
         return "redirect:/user/findAllUser/1/4";
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteUser")
+    public String deleteUser(String[] id) {
+        if (id.length > 0) {
+            try {
+                userService.deleteUser(Arrays.asList(id));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:findAllUser/1/4";
     }
 }

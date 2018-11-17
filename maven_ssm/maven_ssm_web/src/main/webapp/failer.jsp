@@ -138,7 +138,7 @@
 		<ul class="sidebar-menu">
 			<li class="header">菜单</li>
 			<li id="admin-index"><a
-				href="${pageContext.request.contextPath}/pages/main.jsp"><i
+				href="${pageContext.request.contextPath}/index/main"><i
 					class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
 			<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
@@ -149,20 +149,21 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/user/findAll.do"> <i
+							href="${pageContext.request.contextPath}/user/findAllUser/1/4"> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
-					<li id="system-setting"><a href="${pageContext.request.contextPath}/role/findAll.do">
-							<i class="fa fa-circle-o"></i> 角色管理
-					</a></li>
-					<li id="system-setting"><a href="${pageContext.request.contextPath}/permission/findAll.do">
-							<i class="fa fa-circle-o"></i> 资源权限管理
+					<li id="system-setting"><a
+							href="${pageContext.request.contextPath}/role/findAllRole/1/4"> <i
+							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/sysLog/findAll.do"> <i
+							href="${pageContext.request.contextPath}/permission/findAllPer/1/4">
+						<i class="fa fa-circle-o"></i> 资源权限管理
+					</a></li>
+					<li id="system-setting"><a
+							href="${pageContext.request.contextPath}/sysLog/findAllSysLog/1/4"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
-
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
 					<span>基础数据</span> <span class="pull-right-container"> <i

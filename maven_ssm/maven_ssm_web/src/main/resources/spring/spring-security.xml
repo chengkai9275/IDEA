@@ -7,9 +7,13 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security.xsd">
 
+
+
+
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
+    <security:http pattern="/403.jsp" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/js/**" security="none"/>
@@ -20,16 +24,15 @@
     	auto-config="true"	不用自己编写登录的页面，框架提供默认登录页面
     	use-expressions="false"	是否使用SPEL表达式（没学习过）
     -->
-    <security:http auto-config="true" use-expressions="false">
+    <security:http auto-config="true" use-expressions="true">
         <!-- 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" -->
-        <security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN"/>
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN','ROLE_BUSINESS')"/>
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/login.jsp"
                 login-processing-url="/login"
-                default-target-url="/index.jsp"
                 authentication-failure-url="/failer.jsp"
-                authentication-success-forward-url="/pages/main.jsp"
+                authentication-success-forward-url="/index/main"
         />
 
         <!-- 关闭跨域请求 -->

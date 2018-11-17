@@ -46,7 +46,7 @@ public interface UserMapper {
     List<Role> findOtherRoleById(String userId) throws Exception;
 
     /**
-     * 保存用户
+     * 添加用户
      * @param userInfo
      * @return
      * @throws Exception

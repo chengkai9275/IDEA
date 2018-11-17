@@ -64,6 +64,15 @@ public class PermissionController {
     }
 
     /**
+     * 添加权限界面
+     * @return
+     */
+    @RequestMapping("/insertPerJsp")
+    public String insertPerJsp(){
+        return "permission-add";
+    }
+
+    /**
      * 添加权限
      * @param permission
      * @return

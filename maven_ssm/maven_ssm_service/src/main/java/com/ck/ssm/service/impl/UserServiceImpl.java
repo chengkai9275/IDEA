@@ -77,15 +77,18 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 保存用户
+     * 添加新用户
      *
      * @param userInfo
      * @return
      * @throws Exception
      */
-    public Boolean insertUser(UserInfo userInfo) throws Exception {
+    public void insertUser(UserInfo userInfo) throws Exception {
         userInfo.setPassword(BCryptPasswordEncoderUtils.encoderPassword(userInfo.getPassword()));
-        return userMapper.insertUser(userInfo);
+        userMapper.insertUser(userInfo);
+        String userId = userMapper.findUserByName(userInfo.getUsername()).getId();
+        String roleId = "6B29A7F617AC4E33A40FC2A3F3EFD013";
+        userMapper.addRoleToUser(userId,roleId);
     }
 
     /**

@@ -65,6 +65,15 @@ public class RoleController {
     }
 
     /**
+     * 添加角色界面
+     * @return
+     */
+    @RequestMapping("/insertRoleJsp")
+    public String insertRoleJsp(){
+        return "role-add";
+    }
+
+    /**
      * 添加角色
      * @param role
      * @return
@@ -100,7 +109,7 @@ public class RoleController {
     }
 
     /**
-     * 角色添加权限界面
+     * 角色添加权限
      * @return
      */
     @RequestMapping("/addPermissionToRole/{roleId}")
@@ -108,7 +117,7 @@ public class RoleController {
         if(ids.length > 0){
             roleService.addPermissionToRole(roleId,ids);
         }
-        return "redirect:findAllRole/1/4";
+        return "redirect:/role/findAllRole/1/4";
     }
 
     /**

@@ -54,7 +54,7 @@ public interface UserService extends UserDetailsService {
      * @return
      * @throws Exception
      */
-    Boolean insertUser(UserInfo userInfo) throws Exception;
+    void insertUser(UserInfo userInfo) throws Exception;
 
     /**
      * 给用户添加角色

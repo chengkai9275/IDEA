@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,6 +71,7 @@ public class OrdersController {
      * @param ids
      * @return
      */
+    @RolesAllowed({"ROLE_SUPERADMIN","ROLE_BUSINESS"})
     @RequestMapping("/deleteOrder")
     public String deletePro(String[] ids){
         if (ids.length > 0){

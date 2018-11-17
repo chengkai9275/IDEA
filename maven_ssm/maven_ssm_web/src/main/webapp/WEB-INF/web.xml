@@ -8,6 +8,11 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    
     <!--重新指定spring配置文件的路径-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -54,6 +59,10 @@
     </filter-mapping>
 
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
 
     <!--配置默认启动页-->
     <welcome-file-list>
