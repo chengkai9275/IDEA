@@ -1,0 +1,7 @@
+com\ck\ssm\mapper\OrdersMapper.class
+com\ck\ssm\mapper\TravellerMapper.class
+com\ck\ssm\mapper\ProductMapper.class
+com\ck\ssm\mapper\MemberMapper.class
+com\ck\ssm\mapper\UserMapper.class
+com\ck\ssm\mapper\RoleMapper.class
+com\ck\ssm\mapper\PermissionMapper.class

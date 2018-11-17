@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ck.ssm.mapper.PermissionMapper">
+
+    <!--根据角色Id查询权限-->
+    <select id="findAllPer"  resultType="Permission">
+        SELECT * FROM permission WHERE isdelete = 1
+    </select>
+
+    <!--根据角色Id查询权限-->
+    <select id="findPerByRoleId" parameterType="string" resultType="Permission">
+        SELECT * FROM permission
+        WHERE id in (SELECT permissionId from role_permission where roleId = #{id}) and isdelete = 1
+    </select>
+
+    <!--根据Id查询权限-->
+    <select id="findPerById"  resultType="Permission">
+        SELECT * FROM permission WHERE id = #{id} and isdelete = 1
+    </select>
+
+    <!--根据Id查询权限-->
+    <insert id="insertPer"  parameterType="Permission">
+        INSERT INTO permission (permissionName,url) VALUES (#{permissionName},#{url})
+    </insert>
+
+    <!--动态SQL批量删除-->
+    <sql id="perId">
+        <foreach collection="list" item="user_id" open="and id in(" close=")" separator=",">
+            #{user_id}
+        </foreach>
+    </sql>
+
+    <!--根据Id删除权限-->
+    <insert id="deletePer"  parameterType="list">
+        UPDATE permission set isdelete = 0
+        <where>
+            <include refid="perId"></include>
+        </where>
+    </insert>
+</mapper>

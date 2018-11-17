@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ck.ssm.mapper.TravellerMapper">
+
+    <!--根据Id查询旅客-->
+    <select id="findTraById" parameterType="string" resultType="Traveller">
+        SELECT * FROM traveller WHERE id IN (SELECT travellerId from ORDER_TRAVELLER WHERE orderId = #{id})
+    </select>
+</mapper>
